@@ -25,7 +25,7 @@ from statsmodels.tsa.ar_model import AR
 # In[18]:
 
 
-from matplotlib import pyplot
+#from matplotlib import pyplot
 import math
 import time
 
@@ -60,6 +60,7 @@ for eegdata in filename:
     timepoint = temp_trial.shape[1]
     print("{}: {}".format("Total number of time points in per channel per trial is", timepoint))
     for t in range(trial):
+        toSave = [[[0 for k in xrange(32)] for j in xrange(32)] for i in xrange(60)]
         hz = 128
         #a 3 second pre-trial baseline removed
         temp_trial = ica[:,:,t]
@@ -99,12 +100,17 @@ for eegdata in filename:
                     else:
                         MGCM[i,j] = MGCM[i,j]/diag
             enablePrint()
-            pyplot.matshow(MGCM)
-            pyplot.show()
-            np.append(result,MGCM)
-            eegdata = os.path.splitext(eegdata)[0]
-            imgname = "img/{0}_{1}_{2}.png".format(eegdata, str(t).zfill(2), str(k).zfill(2))
-            pyplot.imsave(imgname, MGCM)
+            toSave[i] = MGCM.tolist();
+            #pyplot.matshow(MGCM)
+            #pyplot.show()
+            #np.append(result,MGCM)
+            #eegdata = os.path.splitext(eegdata)[0]
+            #imgname = "img/{0}_{1}_{2}.png".format(eegdata, str(t).zfill(2), str(k).zfill(2))
+            #pyplot.imsave(imgname, MGCM)
+    name = "LSTM_Data/{0}.data".format(str(t).zfill(2))
+    with open(name, 'w') as f:
+    for item in my_list:
+        f.write("%s\n" % item)
 
 
 # In[ ]:
