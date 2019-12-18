@@ -25,7 +25,7 @@ from statsmodels.tsa.ar_model import AR
 # In[18]:
 
 
-#from matplotlib import pyplot
+from matplotlib import pyplot
 import math
 import time
 
@@ -104,13 +104,14 @@ for eegdata in filename:
             #pyplot.matshow(MGCM)
             #pyplot.show()
             #np.append(result,MGCM)
-            #eegdata = os.path.splitext(eegdata)[0]
-            #imgname = "img/{0}_{1}_{2}.png".format(eegdata, str(t).zfill(2), str(k).zfill(2))
-            #pyplot.imsave(imgname, MGCM)
-    name = "LSTM_Data/{0}.data".format(str(t).zfill(2))
-    with open(name, 'w') as f:
-    for item in my_list:
-        f.write("%s\n" % item)
+            eegdata = os.path.splitext(eegdata)[0]
+            imgname = "img/{0}_{1}_{2}.png".format(eegdata, str(t).zfill(2), str(k).zfill(2))
+            pyplot.imsave(imgname, MGCM)
+        
+        name = "LSTM_Data/{0}.data".format(str(t).zfill(2))
+        with open(name, 'w') as f:
+        for item in my_list:
+            f.write("%s\n" % item)
 
 
 # In[ ]:
